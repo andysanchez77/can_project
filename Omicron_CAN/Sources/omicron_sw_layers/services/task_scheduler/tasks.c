@@ -45,6 +45,7 @@ void TASKS_LIST_2MS_B( void )
 {   
     vfnCAN_Periodic_Tx_Queuing();
     vfnSchedulepoint();
+    vfnStartAdcConversion(); 
 }
     
 /* List of tasks to be executed @ 10ms */

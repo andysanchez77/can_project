@@ -1,0 +1,99 @@
+/*******************************************************************************/
+/**
+\file       lib_adc.c
+\brief      Analog to Digital Converter Functions
+\author     Miguel Reyes
+\version    0.1
+\date       03/05/2013
+*/
+
+/*****************************************************************************************************
+* Include files
+*****************************************************************************************************/
+
+/** Core modules */
+/** Configuration Options */
+#include "lib_configuration.h"
+/* S12X derivative information */      
+#include __MCU_DERIVATIVE   
+/** Variable types and common definitions */
+#include "typedefs.h"
+
+/** Own headers */
+/* SCI routines prototypes */ 
+#include "lib_adc.h"
+
+/** Used modules */
+/** PLL prototypes and definitions */
+#include "lib_pll.h"
+
+/*******************************************************************************/
+
+/*Callback called when ADC conversions are done*/
+ADC_Conv_Callback_t pAdcCallback_conversion;
+
+/*******************************************************************************/
+/**
+* \brief    ADC initialization
+* \author   Miguel Reyes @MR 
+* \param    ADC_Conv_Callback_t AdcCallback: callback called when conversions are done
+* \return   void
+*/
+
+void vfnADC_Init(ADC_Conv_Callback_t AdcCallback)
+{
+
+        ATD0CTL0=0x01; //@MR: Select channel AN1 for multi sampling.
+        ATD0CTL1=0x0F; //@MR: Resolution bits to 8bit.
+        ATD0CTL2=0x42; //@MR: Enable fast flag & sequence complete interrupt enable.
+        ATD0CTL3=0x93; //@MR: Right justification in the ATDDRx, FRZ= 0b11, SCx=2 conversions.
+        ATD0CTL4=0xE1; //@MR: Configure sample time to 24, ADC clock to 5 MHz.
+        ATD0CTL5=0x10; //@MR: Multichannel sample mode and 8 bit of resolution.
+        
+        ATD0DIEN= 0x03; //@MR: Enable channel 0 and channel 1
+        
+    pAdcCallback_conversion = AdcCallback; //@MR assign callback
+}
+
+/*******************************************************************************/
+/**
+* \brief    Start a new conversion sequence.
+* \author   Miguel Reyes @MR
+* \param    void
+* \return   void
+*/
+void vfnADC_StartConversion(void){
+    
+    ATD0CTL5=0x10;
+
+}
+
+
+/*******************************************************************************/
+/**
+* \brief    ADC ISR, read byte into input data buffer
+* \author   Miguel Reyes @MR
+* \param    void
+* \return   void
+*/
+#pragma CODE_SEG __NEAR_SEG NON_BANKED
+void interrupt vfnADC_Complete_Conversion_Isr(void)
+{
+
+//@MR structure where the conversions will be stored
+AdcDataChannels_t mDataChannels;
+
+if (ATD0STAT0_SCF==1) {
+   /*Check that both conversions were calculated*/
+   if (ATD0STAT2&0x03){
+      /*After reading ATD0Rx, flags will be cleared due to AFFC=1*/
+      mDataChannels.Channel0=ATD0DR0;
+      mDataChannels.Channel1=ATD0DR1;
+   }
+}
+
+//@MR Call callbacks with conversions
+  pAdcCallback_conversion(mDataChannels);
+
+}
+#pragma CODE_SEG DEFAULT

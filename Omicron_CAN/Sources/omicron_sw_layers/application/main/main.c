@@ -53,6 +53,12 @@ void main(void)
     vfnInterrupt_Init(ASW_WO_BOOT);          
     /* PLL initialization to the desired target frequency */
     vfnPLL_Init();
+    
+    /* Data Port A initialization */
+    PORTA = 0x00;           
+    /* Data Direction Register Setup */
+    DDRA =  0x0F; 
+    
     /* Dynamic Memory Allocation initialization */
     vfnMemAlloc_NearInit(&NearMemAlloc_config[0]);
     vfnMemAlloc_Init(&DynamicMemAlloc_config[0]);

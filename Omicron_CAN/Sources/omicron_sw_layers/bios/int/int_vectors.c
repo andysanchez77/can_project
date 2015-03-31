@@ -15,6 +15,14 @@
 /** Own modules */
 #include    "int_vectors.h"
 
+/** Own headers */
+/* SCI routines prototypes */ 
+#include "lib_adc.h"
+
+/** Used modules */
+/** PLL prototypes and definitions */
+#include "pll.h"
+
 /*****************************************************************************************************
 * Declaration of module wide TYPES
 *****************************************************************************************************/
@@ -138,7 +146,8 @@ void (* near const vectors[])(void) @ 0xFF10 =
   vfnDummy_D_Isr,          /* 0x66  0xFFCC ivVu8Reserved25   */
   vfnDummy_D_Isr,          /* 0x67  0xFFCE ivVu8Reserved24   */
   vfnDummy_D_Isr,          /* 0x68  0xFFD0 ivVatd          */
-  vfnDummy_D_Isr,          /* 0x69  0xFFD2 ivVu8Reserved22   */
+  vfnADC_Complete_Conversion_Isr, /* 0x69  0xFFD2 ivVatd0   */
+ // vfnDummy_D_Isr,          /* 0x69  0xFFD2 ivVu8Reserved22   */
   vfnSCI1_TxRx_Isr,         /* 0x6A  0xFFD4 ivVsci1         */
   vfnSCI0_TxRx_Isr,         /* 0x6B  0xFFD6 ivVsci0         */
   vfnDummy_D_Isr,          /* 0x6C  0xFFD8 ivVspi0         */
