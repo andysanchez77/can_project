@@ -1,0 +1,4 @@
+Data < ADDXPR ONLY_ADD_IF_NEW "mscan[0]"
+Data < ADDXPR ONLY_ADD_IF_NEW "aMSCAN_Tx_Buffers"
+Data < ADDXPR ONLY_ADD_IF_NEW "aMSCAN_Rx_Buffers"
+Data < ADDXPR ONLY_ADD_IF_NEW "u8RxFifoDepth"
