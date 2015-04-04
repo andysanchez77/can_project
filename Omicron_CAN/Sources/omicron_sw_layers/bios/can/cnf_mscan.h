@@ -143,6 +143,10 @@ typedef struct
 #define RX_32_BIT_CANID_0           0x1abcdef5
 #define RX_32_BIT_CANID_1           0x1abcdef6
 
+/*Team 3: Rx Masks */
+#define RX_32_BIT_CANID_2           0x1abcdef7
+#define RX_32_BIT_CANID_3           0x1abcdef8
+
 #define CAN_RX_BUFFER_DEPTH         32              /* Software buffer depth for all rx filters per device */
 #define CAN_TX_QUEUE_DEPTH          16              /* Software queue depth for transmission purposes */
 

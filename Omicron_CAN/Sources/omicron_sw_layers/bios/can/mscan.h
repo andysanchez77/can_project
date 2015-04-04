@@ -44,6 +44,8 @@ typedef struct
     UINT8                   rx_fifo_current_depth;  /**< number of messages that have been rx and are pending to be read by the uppper layer>*/
     UINT8                   tx_queue_depth;         /**< number of messages that have been queued by the upper layer and are pending tx >*/
     UINT8                   tx_queue_current_depth; /**< number of messages that have been queued by the upper layer and are pending tx >*/
+    tCallbackFunction       rx_callback;            /*Team3: RX callback triggered when a reception*/
+    tCallbackFunction       tx_callback;            /*Team3: TX callback triggered when a Transmission*/
 }tMSCAN_DeviceStatus;
 
 /*-- Global Variables --------------------------------------------------------*/
