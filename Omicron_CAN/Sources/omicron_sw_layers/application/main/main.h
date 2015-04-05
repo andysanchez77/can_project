@@ -46,6 +46,8 @@
 /** CAN communications */
 #include      "mscan.h"
 #include      "cnf_mscan.h"
+/** ADC driver*/
+#include      "lib_adc.h"
 
 /*****************************************************************************************************
 * Definition of module wide VARIABLEs - NOT for use in other modules

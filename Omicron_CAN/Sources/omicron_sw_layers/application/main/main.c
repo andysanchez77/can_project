@@ -41,6 +41,8 @@ UINT16 u16MemStatus;
 
 void vfnBackgroundSubsystemTasks(void);
 
+extern void vfnStoreAdcResult (AdcDataChannels_t resultOfChannels);
+
 /*~~~~~~~ Main Code ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 void main(void) 
@@ -64,6 +66,8 @@ void main(void)
     vfnMemAlloc_Init(&DynamicMemAlloc_config[0]);
     /* Microcontroller Input/Output pins initialization */
     vfnInputs_Outputs_Init();
+    /* Initialize ADC*/
+    vfnADC_Init(vfnStoreAdcResult);
     /* Initialize CAN Communications */
     vfnCAN_Init(&MSCAN_cfg[0]);
     /* Initialize Task Scheduler */ 

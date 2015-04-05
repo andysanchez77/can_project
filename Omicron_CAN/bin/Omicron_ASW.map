@@ -1,5 +1,5 @@
 *** EVALUATION ***
-PROGRAM "C:\Users\ANDSANCH\Documents\GitHub\can_project\Omicron_CAN\bin\Omicron_ASW.abs"
+PROGRAM "C:\Users\Miguel\Documents\GitHub\can_project\Omicron_CAN\bin\Omicron_ASW.abs"
 
 *********************************************************************************************
 TARGET SECTION
@@ -42,8 +42,8 @@ Entry point: 0x4000 (_Startup)
 _startupData is allocated at 0x400B and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
-  _Range   pZeroOut       0x2100     717
-  _Copy    *toCopyDownBeg 0x42FD
+  _Range   pZeroOut       0x2100     722
+  _Copy    *toCopyDownBeg 0x4310
 } _startupData;
 
 *********************************************************************************************
@@ -52,10 +52,10 @@ Section Name                    Size  Type     From       To       Segment
 ---------------------------------------------------------------------------------------------
 .init                             11     R     0x4000     0x400A   ROM_4000
 .startData                        96     R     0x400B     0x406A   ROM_4000
-.rodata                          145     R     0x406B     0x40FB   ROM_4000
-NON_BANKED                       513     R     0x40FC     0x42FC   ROM_4000
-.copy                             69     R     0x42FD     0x4341   ROM_4000
-.text                           3717     R   0xFE8000   0xFE8E84   PAGE_FE
+.rodata                           90     R     0x406B     0x40C4   ROM_4000
+NON_BANKED                       587     R     0x40C5     0x430F   ROM_4000
+.copy                             69     R     0x4310     0x4354   ROM_4000
+.text                           4722     R   0xFE8000   0xFE9271   PAGE_FE
 XGATE_VECTORS                    452     R   0xE08800   0xE089C3   PAGE_E0
 XGATE_CODE                         4     R   0xE089C4   0xE089C7   PAGE_E0
 .stack                           256   R/W     0x2000     0x20FF   RAM
@@ -800,12 +800,12 @@ XGATE_CODE                         4     R   0xE089C4   0xE089C7   PAGE_E0
 .abs_section_3f2                   2   N/I      0x3F2      0x3F3   .absSeg737
 .abs_section_ff10                238     R     0xFF10     0xFFFD   .absSeg738
 .bss                             586   R/W     0x214C     0x2395   RAM
-.common                           55   R/W     0x2396     0x23CC   RAM
+.common                           60   R/W     0x2396     0x23D1   RAM
 .vectSeg739_vect                   2     R     0xFFFE     0xFFFF   .vectSeg739
 
 Summary of section sizes per section type:
-READ_ONLY (R):        147F (dec:     5247)
-READ_WRITE (R/W):      3CD (dec:      973)
+READ_ONLY (R):        187F (dec:     6271)
+READ_WRITE (R/W):      3D2 (dec:      978)
 NO_INIT (N/I):         383 (dec:      899)
 
 *********************************************************************************************
@@ -1008,21 +1008,21 @@ MODULE:                 -- mc9s12xep100.c.o --
      _CAN0RXERR                                 14E       1       1       0   .abs_section_14e
      _CAN0TXERR                                 14F       1       1       0   .abs_section_14f
      _CAN0IDAR0                                 150       1       1       3   .abs_section_150
-     _CAN0IDAR1                                 151       1       1       2   .abs_section_151
-     _CAN0IDAR2                                 152       1       1       2   .abs_section_152
-     _CAN0IDAR3                                 153       1       1       2   .abs_section_153
+     _CAN0IDAR1                                 151       1       1       0   .abs_section_151
+     _CAN0IDAR2                                 152       1       1       0   .abs_section_152
+     _CAN0IDAR3                                 153       1       1       0   .abs_section_153
      _CAN0IDMR0                                 154       1       1       3   .abs_section_154
-     _CAN0IDMR1                                 155       1       1       2   .abs_section_155
-     _CAN0IDMR2                                 156       1       1       2   .abs_section_156
-     _CAN0IDMR3                                 157       1       1       2   .abs_section_157
+     _CAN0IDMR1                                 155       1       1       0   .abs_section_155
+     _CAN0IDMR2                                 156       1       1       0   .abs_section_156
+     _CAN0IDMR3                                 157       1       1       0   .abs_section_157
      _CAN0IDAR4                                 158       1       1       3   .abs_section_158
-     _CAN0IDAR5                                 159       1       1       2   .abs_section_159
-     _CAN0IDAR6                                 15A       1       1       2   .abs_section_15a
-     _CAN0IDAR7                                 15B       1       1       2   .abs_section_15b
+     _CAN0IDAR5                                 159       1       1       0   .abs_section_159
+     _CAN0IDAR6                                 15A       1       1       0   .abs_section_15a
+     _CAN0IDAR7                                 15B       1       1       0   .abs_section_15b
      _CAN0IDMR4                                 15C       1       1       3   .abs_section_15c
-     _CAN0IDMR5                                 15D       1       1       2   .abs_section_15d
-     _CAN0IDMR6                                 15E       1       1       2   .abs_section_15e
-     _CAN0IDMR7                                 15F       1       1       1   .abs_section_15f
+     _CAN0IDMR5                                 15D       1       1       0   .abs_section_15d
+     _CAN0IDMR6                                 15E       1       1       0   .abs_section_15e
+     _CAN0IDMR7                                 15F       1       1       0   .abs_section_15f
      _CAN0RXIDR0                                160       1       1       2   .abs_section_160
      _CAN0RXIDR1                                161       1       1       1   .abs_section_161
      _CAN0RXIDR2                                162       1       1       1   .abs_section_162
@@ -1483,12 +1483,12 @@ MODULE:                 -- mc9s12xep100.c.o --
      _PER01AD1                                  27E       2       2       0   .abs_section_27e
      _CAN4RXTSR                                 2AE       2       2       0   .abs_section_2ae
      _CAN4TXTSR                                 2BE       2       2       0   .abs_section_2be
-     _ATD0CTL01                                 2C0       2       2       0   .abs_section_2c0
-     _ATD0CTL23                                 2C2       2       2       0   .abs_section_2c2
-     _ATD0CTL45                                 2C4       2       2       1   .abs_section_2c4
+     _ATD0CTL01                                 2C0       2       2       2   .abs_section_2c0
+     _ATD0CTL23                                 2C2       2       2       2   .abs_section_2c2
+     _ATD0CTL45                                 2C4       2       2       3   .abs_section_2c4
      _ATD0CMPE                                  2C8       2       2       0   .abs_section_2c8
      _ATD0STAT2                                 2CA       2       2       1   .abs_section_2ca
-     _ATD0DIEN                                  2CC       2       2       8   .abs_section_2cc
+     _ATD0DIEN                                  2CC       2       2       9   .abs_section_2cc
      _ATD0CMPHT                                 2CE       2       2       0   .abs_section_2ce
      _ATD0DR0                                   2D0       2       2       1   .abs_section_2d0
      _ATD0DR1                                   2D2       2       2       1   .abs_section_2d2
@@ -1569,17 +1569,17 @@ MODULE:                 -- mc9s12xep100.c.o --
      _TIM_PACNT                                 3F2       2       2       0   .abs_section_3f2
 MODULE:                 -- rtshc12.c.o (ansixb.lib) --
 - PROCEDURES:
-     _LCMP                                     40FC       A      10       1   NON_BANKED  
-     _LMULU16x32                               4106       F      15       1   NON_BANKED  
-     _lDivMod                                  4115      B9     185       1   NON_BANKED  
-     _LDIVU                                    41CE       E      14       2   NON_BANKED  
-     _COPY                                     41DC       8       8       1   NON_BANKED  
-     _CASE_CHECKED                             41E4       B      11       1   NON_BANKED  
-     _CASE_CHECKED_BYTE                        41EF      14      20       1   NON_BANKED  
+     _LCMP                                     40C5       A      10       1   NON_BANKED  
+     _LMULU16x32                               40CF       F      15       1   NON_BANKED  
+     _lDivMod                                  40DE      B9     185       1   NON_BANKED  
+     _LDIVU                                    4197       E      14       2   NON_BANKED  
+     _COPY                                     41A5       8       8       1   NON_BANKED  
+     _CASE_CHECKED                             41AD       B      11       1   NON_BANKED  
+     _CASE_CHECKED_BYTE                        41B8      14      20       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- int_vectors.c.o --
 - PROCEDURES:
-     vfnDummy_D_Isr                            4203       1       1     111   NON_BANKED  
+     vfnDummy_D_Isr                            41CC       1       1     111   NON_BANKED  
 - VARIABLES:
      vectors                                   FF10      EE     238       0   .abs_section_ff10
 MODULE:                 -- interrupt.c.o --
@@ -1594,7 +1594,7 @@ MODULE:                 -- pit.c.o --
 - PROCEDURES:
      vfnPIT0_Init                            FE8110      53      83       2   .text       
      vfnPIT0_Start                           FE8163       D      13       2   .text       
-     vfnPIT_Channel0_Isr                       4204      18      24       1   NON_BANKED  
+     vfnPIT_Channel0_Isr                       41CD      18      24       1   NON_BANKED  
 - VARIABLES:
      vfnPIT0_Callback                          2396       3       3       5   .common     
 MODULE:                 -- pll.c.o --
@@ -1603,16 +1603,16 @@ MODULE:                 -- pll.c.o --
      vfnPLL_ON                               FE81A7      18      24       2   .text       
      vfnPLL_OFF                              FE81BF       8       8       2   .text       
      vfnSelectClockSource_PLL                FE81C7      46      70       2   .text       
-     vfnPll_Clock_Monitor_Isr                  421C      2B      43       1   NON_BANKED  
+     vfnPll_Clock_Monitor_Isr                  41E5      2B      43       1   NON_BANKED  
 - VARIABLES:
      gu16ClockGlobalStatus                     239A       2       2       5   .common     
      u16PLL_Loss_of_Lock_Counter               239C       2       2       3   .common     
      gu32BusFrequency                          239E       4       4       4   .common     
 MODULE:                 -- serial.c.o --
 - PROCEDURES:
-     vfnSCI_Tx_Rx_Handler                      4247      7A     122       2   NON_BANKED  
-     vfnSCI0_TxRx_Isr                          42C1       6       6       1   NON_BANKED  
-     vfnSCI1_TxRx_Isr                          42C7       7       7       1   NON_BANKED  
+     vfnSCI_Tx_Rx_Handler                      4210      7A     122       2   NON_BANKED  
+     vfnSCI0_TxRx_Isr                          428A       6       6       1   NON_BANKED  
+     vfnSCI1_TxRx_Isr                          4290       7       7       1   NON_BANKED  
 - VARIABLES:
      sci_ch_status                             23A2       2       2       2   .common     
 MODULE:                 -- watchdog.c.o --
@@ -1632,30 +1632,30 @@ MODULE:                 -- xgate_vectors.cxgate.o --
      XGATE_VectorTable                       E08800     1C4     452       1   XGATE_VECTORS
 MODULE:                 -- tasks.c.o --
 - PROCEDURES:
-     TASKS_LIST_1MS                          FE8248       5       5       2   .text       
-     TASKS_LIST_2MS_A                        FE824D       9       9       2   .text       
-     TASKS_LIST_2MS_B                        FE8256       D      13       2   .text       
+     TASKS_LIST_1MS                          FE8248       9       9       2   .text       
+     TASKS_LIST_2MS_A                        FE8251       9       9       2   .text       
+     TASKS_LIST_2MS_B                        FE825A       9       9       2   .text       
      TASKS_LIST_10MS                         FE8263       9       9       2   .text       
      TASKS_LIST_50MS                         FE826C       5       5       2   .text       
      TASKS_LIST_100MS                        FE8271       5       5       2   .text       
 - VARIABLES:
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     main                                    FE8276      51      81       2   .text       
-     vfnBackgroundSubsystemTasks             FE82C7       1       1       2   .text       
+     main                                    FE8276      5A      90       2   .text       
+     vfnBackgroundSubsystemTasks             FE82D0       1       1       2   .text       
 - VARIABLES:
 MODULE:                 -- scheduler.c.o --
 - PROCEDURES:
-     vfnScheduler_GetTaskRunning             FE82C8       4       4       2   .text       
-     vfnScheduler_TaskStart                  FE82CC      1C      28      14   .text       
-     vfnScheduler_TaskActivate               FE82E8       F      15      12   .text       
-     vfnScheduler_TaskPreempt                FE82F7       8       8       2   .text       
-     vfnScheduler_TaskRestart                FE82FF      10      16       2   .text       
-     vfnScheduler_Init                       FE830F      89     137       2   .text       
-     vfnScheduler_Start                      FE8398       A      10       2   .text       
-     vfnSchedulepoint                        FE83A2      B5     181      12   .text       
-     vfnTask_Scheduler                       FE8457      A8     168       2   .text       
-     vfnScheduler_Callback                   FE84FF      6B     107       3   .text       
+     vfnScheduler_GetTaskRunning             FE82D1       4       4       2   .text       
+     vfnScheduler_TaskStart                  FE82D5      1C      28      14   .text       
+     vfnScheduler_TaskActivate               FE82F1       F      15      12   .text       
+     vfnScheduler_TaskPreempt                FE8300       8       8       2   .text       
+     vfnScheduler_TaskRestart                FE8308      10      16       2   .text       
+     vfnScheduler_Init                       FE8318      89     137       2   .text       
+     vfnScheduler_Start                      FE83A1       A      10       2   .text       
+     vfnSchedulepoint                        FE83AB      B5     181      12   .text       
+     vfnTask_Scheduler                       FE8460      A8     168       2   .text       
+     vfnScheduler_Callback                   FE8508      6B     107       3   .text       
 - VARIABLES:
      EmptyTask                                 406B       8       8      12   .rodata     
      TimeTriggeredTasks                        2100      30      48      12   .data       
@@ -1680,11 +1680,11 @@ MODULE:                 -- cnf_mem_alloc.c.o --
      DynamicMemAlloc_config                    408C       3       3       1   .rodata     
 MODULE:                 -- memory_allocation.c.o --
 - PROCEDURES:
-     vfnMemAlloc_NearInit                    FE856A      76     118       2   .text       
-     MemAlloc_NearReserve                    FE85E0      5A      90      10   .text       
-     vfnMemAlloc_NearErase                   FE863A      11      17       2   .text       
-     vfnMemAlloc_Init                        FE864B      90     144       2   .text       
-     vfnMemAlloc_Erase                       FE86DB      17      23       2   .text       
+     vfnMemAlloc_NearInit                    FE8573      76     118       2   .text       
+     MemAlloc_NearReserve                    FE85E9      5A      90      10   .text       
+     vfnMemAlloc_NearErase                   FE8643      11      17       2   .text       
+     vfnMemAlloc_Init                        FE8654      90     144       2   .text       
+     vfnMemAlloc_Erase                       FE86E4      17      23       2   .text       
 - VARIABLES:
      NearRamPages_status                       2130       8       8       1   .data       
      PagedRamPagesFar_status                   2138      14      20       1   .data       
@@ -1697,29 +1697,29 @@ MODULE:                 -- memory_allocation.c.o --
 MODULE:                 -- cnf_mscan.c.o --
 - PROCEDURES:
 - VARIABLES:
-     MSCAN_A_rx_msg_cfg                        408F      58      88       1   .rodata     
-     MSCAN_A_tx_msg_cfg                        40E7       3       3       1   .rodata     
-     CAN_device_cfg                            40EA       F      15       1   .rodata     
-     MSCAN_cfg                                 40F9       3       3       1   .rodata     
+     MSCAN_A_rx_msg_cfg                        408F      21      33       1   .rodata     
+     MSCAN_A_tx_msg_cfg                        40B0       3       3       1   .rodata     
+     CAN_device_cfg                            40B3       F      15       1   .rodata     
+     MSCAN_cfg                                 40C2       3       3       1   .rodata     
 MODULE:                 -- mscan.c.o --
 - PROCEDURES:
-     vfnCAN_Init                             FE86F2     132     306       3   .text       
-     vfnCAN_BaudRateConfig                   FE8824      26      38       2   .text       
-     vfnCAN_AcceptanceFiltersInit            FE884A     187     391       7   .text       
-     u8CAN_enqueueFrameforTx                 FE89D1      B2     178       5   .text       
-     vfnCAN_Tx_handler                       FE8A83     128     296       2   .text       
-     u8CAN_RxFifoDepth                       FE8BAB      12      18       2   .text       
-     vfnCAN_Rx_handler                       FE8BBD     192     402       4   .text       
-     vfnCAN_GetRxMessages                    FE8D4F      5F      95       2   .text       
-     vfnCAN_A_RxFrame_Isr                      42CE       7       7       1   NON_BANKED  
-     vfnCAN_A_TxFrame_Isr                      42D5       7       7       1   NON_BANKED  
+     vfnCAN_Init                             FE86FB     139     313       3   .text       
+     vfnCAN_BaudRateConfig                   FE8834      26      38       2   .text       
+     vfnCAN_AcceptanceFiltersInit            FE885A     4C3    1219      12   .text       
+     u8CAN_enqueueFrameforTx                 FE8D1D      B2     178       9   .text       
+     vfnCAN_Tx_handler                       FE8DCF     128     296       2   .text       
+     u8CAN_RxFifoDepth                       FE8EF7      12      18       2   .text       
+     vfnCAN_Rx_handler                       FE8F09     192     402       4   .text       
+     vfnCAN_GetRxMessages                    FE909B      5F      95       6   .text       
+     vfnCAN_A_RxFrame_Isr                      4297      51      81       1   NON_BANKED  
+     vfnCAN_A_TxFrame_Isr                      42E8       7       7       1   NON_BANKED  
 - VARIABLES:
-     mscan_cfg                                 23C4       2       2       6   .common     
-     mscan                                     23C6       2       2      21   .common     
+     mscan_cfg                                 23C4       2       2       8   .common     
+     mscan                                     23C6       2       2      22   .common     
 MODULE:                 -- hal_can.c.o --
 - PROCEDURES:
-     vfnCAN_Periodic_Tx_Queuing              FE8DAE      B5     181       2   .text       
-     vfnCAN_Periodic_Rx                      FE8E63      17      23       2   .text       
+     vfnCAN_Periodic_Tx_Queuing              FE90FA      B5     181       2   .text       
+     vfnCAN_Periodic_Rx                      FE91AF      17      23       2   .text       
 - VARIABLES:
      u16Tx_Loop_Counter.1                      2152       2       2       7   .bss        
      aMSCAN_Tx_Buffers.2                       2154      22      34      18   .bss        
@@ -1727,14 +1727,19 @@ MODULE:                 -- hal_can.c.o --
      u8ErrorFlag                               23C8       1       1       2   .common     
 MODULE:                 -- lib_adc.c.o --
 - PROCEDURES:
-     vfnADC_StartConversion                  FE8E7A       6       6       2   .text       
-     vfnADC_Complete_Conversion_Isr            42DC      21      33       1   NON_BANKED  
+     vfnADC_Init                             FE91C6      2F      47       2   .text       
+     vfnADC_StartConversion                  FE91F5       6       6       2   .text       
+     vfnADC_Complete_Conversion_Isr            42EF      21      33       1   NON_BANKED  
 - VARIABLES:
-     pAdcCallback_conversion                   23CA       3       3       1   .common     
+     pAdcCallback_conversion                   23CA       3       3       3   .common     
 MODULE:                 -- Diagnostic.c.o --
 - PROCEDURES:
-     vfnStartAdcConversion                   FE8E80       5       5       2   .text       
+     vfnCbMsgID_0x1abcdef7                   FE91FB      34      52       2   .text       
+     vfnCbMsgID_0x1abcdef8                   FE922F      34      52       2   .text       
+     vfnStoreAdcResult                       FE9263       F      15       3   .text       
 - VARIABLES:
+     g16AdcResult_Ch0                          23CE       2       2       3   .common     
+     g16AdcResult_Ch1                          23D0       2       2       3   .common     
 
 *********************************************************************************************
 MODULE STATISTIC
@@ -1753,15 +1758,15 @@ MODULE STATISTIC
   xgate_config.c.o                             0     32      0
   xgate_vectors.cxgate.o                       0      4    452
   tasks.c.o                                    0     46      0
-  main.c.o                                     0     82      0
+  main.c.o                                     0     91      0
   scheduler.c.o                               67    674      8
   cnf_mem_alloc.c.o                            0      0     28
   memory_allocation.c.o                       42    392      0
-  cnf_mscan.c.o                                0      0    109
-  mscan.c.o                                    4   1738      0
+  cnf_mscan.c.o                                0      0     54
+  mscan.c.o                                    4   2647      0
   hal_can.c.o                                581    204      0
-  lib_adc.c.o                                  3     39      0
-  Diagnostic.c.o                               0      5      0
+  lib_adc.c.o                                  3     86      0
+  Diagnostic.c.o                               4    119      0
   other                                      256     98     69
 
 *********************************************************************************************
@@ -1780,7 +1785,8 @@ SECTION: ".text"
   vfnCAN_Init vfnCAN_BaudRateConfig vfnCAN_AcceptanceFiltersInit 
   u8CAN_enqueueFrameforTx vfnCAN_Tx_handler u8CAN_RxFifoDepth vfnCAN_Rx_handler 
   vfnCAN_GetRxMessages vfnCAN_Periodic_Tx_Queuing vfnCAN_Periodic_Rx 
-  vfnADC_StartConversion vfnStartAdcConversion 
+  vfnADC_Init vfnADC_StartConversion vfnCbMsgID_0x1abcdef7 
+  vfnCbMsgID_0x1abcdef8 vfnStoreAdcResult 
 SECTION: ".data"
   TimeTriggeredTasks NearRamPages_status PagedRamPagesFar_status 
 SECTION: ".bss"
@@ -3285,7 +3291,8 @@ SECTION: ".common"
   ptrTaskScheduler_Task_Running u8_10ms_Counter u8_50ms_Counter 
   u8_100ms_Counter EventTriggeredTasks EventTriggeredTasksInternal 
   mem_alloc_nearcnf NearMemAlloc_Status mem_alloc_farcnf MemAlloc_Status 
-  mscan_cfg mscan u8ErrorFlag pAdcCallback_conversion 
+  mscan_cfg mscan u8ErrorFlag pAdcCallback_conversion g16AdcResult_Ch0 
+  g16AdcResult_Ch1 
 SECTION: ".abs_section_ff10"
   vectors 
 
@@ -3531,21 +3538,21 @@ OBJECT LIST SORTED BY ADDRESS
      _CAN0RXERR                                 14E       1       1       0   .abs_section_14e
      _CAN0TXERR                                 14F       1       1       0   .abs_section_14f
      _CAN0IDAR0                                 150       1       1       3   .abs_section_150
-     _CAN0IDAR1                                 151       1       1       2   .abs_section_151
-     _CAN0IDAR2                                 152       1       1       2   .abs_section_152
-     _CAN0IDAR3                                 153       1       1       2   .abs_section_153
+     _CAN0IDAR1                                 151       1       1       0   .abs_section_151
+     _CAN0IDAR2                                 152       1       1       0   .abs_section_152
+     _CAN0IDAR3                                 153       1       1       0   .abs_section_153
      _CAN0IDMR0                                 154       1       1       3   .abs_section_154
-     _CAN0IDMR1                                 155       1       1       2   .abs_section_155
-     _CAN0IDMR2                                 156       1       1       2   .abs_section_156
-     _CAN0IDMR3                                 157       1       1       2   .abs_section_157
+     _CAN0IDMR1                                 155       1       1       0   .abs_section_155
+     _CAN0IDMR2                                 156       1       1       0   .abs_section_156
+     _CAN0IDMR3                                 157       1       1       0   .abs_section_157
      _CAN0IDAR4                                 158       1       1       3   .abs_section_158
-     _CAN0IDAR5                                 159       1       1       2   .abs_section_159
-     _CAN0IDAR6                                 15A       1       1       2   .abs_section_15a
-     _CAN0IDAR7                                 15B       1       1       2   .abs_section_15b
+     _CAN0IDAR5                                 159       1       1       0   .abs_section_159
+     _CAN0IDAR6                                 15A       1       1       0   .abs_section_15a
+     _CAN0IDAR7                                 15B       1       1       0   .abs_section_15b
      _CAN0IDMR4                                 15C       1       1       3   .abs_section_15c
-     _CAN0IDMR5                                 15D       1       1       2   .abs_section_15d
-     _CAN0IDMR6                                 15E       1       1       2   .abs_section_15e
-     _CAN0IDMR7                                 15F       1       1       1   .abs_section_15f
+     _CAN0IDMR5                                 15D       1       1       0   .abs_section_15d
+     _CAN0IDMR6                                 15E       1       1       0   .abs_section_15e
+     _CAN0IDMR7                                 15F       1       1       0   .abs_section_15f
      _CAN0RXIDR0                                160       1       1       2   .abs_section_160
      _CAN0RXIDR1                                161       1       1       1   .abs_section_161
      _CAN0RXIDR2                                162       1       1       1   .abs_section_162
@@ -3868,13 +3875,13 @@ OBJECT LIST SORTED BY ADDRESS
      _CAN4TXDLR                                 2BC       1       1       0   .abs_section_2bc
      _CAN4TXTBPR                                2BD       1       1       0   .abs_section_2bd
      _CAN4TXTSR                                 2BE       2       2       0   .abs_section_2be
-     _ATD0CTL01                                 2C0       2       2       0   .abs_section_2c0
-     _ATD0CTL23                                 2C2       2       2       0   .abs_section_2c2
-     _ATD0CTL45                                 2C4       2       2       1   .abs_section_2c4
+     _ATD0CTL01                                 2C0       2       2       2   .abs_section_2c0
+     _ATD0CTL23                                 2C2       2       2       2   .abs_section_2c2
+     _ATD0CTL45                                 2C4       2       2       3   .abs_section_2c4
      _ATD0STAT0                                 2C6       1       1       1   .abs_section_2c6
      _ATD0CMPE                                  2C8       2       2       0   .abs_section_2c8
      _ATD0STAT2                                 2CA       2       2       1   .abs_section_2ca
-     _ATD0DIEN                                  2CC       2       2       8   .abs_section_2cc
+     _ATD0DIEN                                  2CC       2       2       9   .abs_section_2cc
      _ATD0CMPHT                                 2CE       2       2       0   .abs_section_2ce
      _ATD0DR0                                   2D0       2       2       1   .abs_section_2d0
      _ATD0DR1                                   2D2       2       2       1   .abs_section_2d2
@@ -4061,36 +4068,38 @@ OBJECT LIST SORTED BY ADDRESS
      NearMemAlloc_Status                       23BA       3       3      10   .common     
      mem_alloc_farcnf                          23BE       2       2       4   .common     
      MemAlloc_Status                           23C0       3       3       7   .common     
-     mscan_cfg                                 23C4       2       2       6   .common     
-     mscan                                     23C6       2       2      21   .common     
+     mscan_cfg                                 23C4       2       2       8   .common     
+     mscan                                     23C6       2       2      22   .common     
      u8ErrorFlag                               23C8       1       1       2   .common     
-     pAdcCallback_conversion                   23CA       3       3       1   .common     
+     pAdcCallback_conversion                   23CA       3       3       3   .common     
+     g16AdcResult_Ch0                          23CE       2       2       3   .common     
+     g16AdcResult_Ch1                          23D0       2       2       3   .common     
      _Startup                                  4000       B      11       1   .init       
      EmptyTask                                 406B       8       8      12   .rodata     
      NearRamPages_config                       4073       6       6       1   .rodata     
      NearMemAlloc_config                       4079       3       3       1   .rodata     
      PagedRamPagesFar_config                   407C      10      16       1   .rodata     
      DynamicMemAlloc_config                    408C       3       3       1   .rodata     
-     MSCAN_A_rx_msg_cfg                        408F      58      88       1   .rodata     
-     MSCAN_A_tx_msg_cfg                        40E7       3       3       1   .rodata     
-     CAN_device_cfg                            40EA       F      15       1   .rodata     
-     MSCAN_cfg                                 40F9       3       3       1   .rodata     
-     _LCMP                                     40FC       A      10       1   NON_BANKED  
-     _LMULU16x32                               4106       F      15       1   NON_BANKED  
-     _lDivMod                                  4115      B9     185       1   NON_BANKED  
-     _LDIVU                                    41CE       E      14       2   NON_BANKED  
-     _COPY                                     41DC       8       8       1   NON_BANKED  
-     _CASE_CHECKED                             41E4       B      11       1   NON_BANKED  
-     _CASE_CHECKED_BYTE                        41EF      14      20       1   NON_BANKED  
-     vfnDummy_D_Isr                            4203       1       1     111   NON_BANKED  
-     vfnPIT_Channel0_Isr                       4204      18      24       1   NON_BANKED  
-     vfnPll_Clock_Monitor_Isr                  421C      2B      43       1   NON_BANKED  
-     vfnSCI_Tx_Rx_Handler                      4247      7A     122       2   NON_BANKED  
-     vfnSCI0_TxRx_Isr                          42C1       6       6       1   NON_BANKED  
-     vfnSCI1_TxRx_Isr                          42C7       7       7       1   NON_BANKED  
-     vfnCAN_A_RxFrame_Isr                      42CE       7       7       1   NON_BANKED  
-     vfnCAN_A_TxFrame_Isr                      42D5       7       7       1   NON_BANKED  
-     vfnADC_Complete_Conversion_Isr            42DC      21      33       1   NON_BANKED  
+     MSCAN_A_rx_msg_cfg                        408F      21      33       1   .rodata     
+     MSCAN_A_tx_msg_cfg                        40B0       3       3       1   .rodata     
+     CAN_device_cfg                            40B3       F      15       1   .rodata     
+     MSCAN_cfg                                 40C2       3       3       1   .rodata     
+     _LCMP                                     40C5       A      10       1   NON_BANKED  
+     _LMULU16x32                               40CF       F      15       1   NON_BANKED  
+     _lDivMod                                  40DE      B9     185       1   NON_BANKED  
+     _LDIVU                                    4197       E      14       2   NON_BANKED  
+     _COPY                                     41A5       8       8       1   NON_BANKED  
+     _CASE_CHECKED                             41AD       B      11       1   NON_BANKED  
+     _CASE_CHECKED_BYTE                        41B8      14      20       1   NON_BANKED  
+     vfnDummy_D_Isr                            41CC       1       1     111   NON_BANKED  
+     vfnPIT_Channel0_Isr                       41CD      18      24       1   NON_BANKED  
+     vfnPll_Clock_Monitor_Isr                  41E5      2B      43       1   NON_BANKED  
+     vfnSCI_Tx_Rx_Handler                      4210      7A     122       2   NON_BANKED  
+     vfnSCI0_TxRx_Isr                          428A       6       6       1   NON_BANKED  
+     vfnSCI1_TxRx_Isr                          4290       7       7       1   NON_BANKED  
+     vfnCAN_A_RxFrame_Isr                      4297      51      81       1   NON_BANKED  
+     vfnCAN_A_TxFrame_Isr                      42E8       7       7       1   NON_BANKED  
+     vfnADC_Complete_Conversion_Isr            42EF      21      33       1   NON_BANKED  
      vectors                                   FF10      EE     238       0   .abs_section_ff10
      XGATE_VectorTable                       E08800     1C4     452       1   XGATE_VECTORS
      __X_ErrorHandler                        E089C4       4       4     113   XGATE_CODE  
@@ -4106,41 +4115,44 @@ OBJECT LIST SORTED BY ADDRESS
      vfnCOPWatchdog_Init                     FE820D       9       9       2   .text       
      vfnCOPWatchdog_Reset                    FE8216      12      18       2   .text       
      vfn_XGATE_CPU_init                      FE8228      20      32       2   .text       
-     TASKS_LIST_1MS                          FE8248       5       5       2   .text       
-     TASKS_LIST_2MS_A                        FE824D       9       9       2   .text       
-     TASKS_LIST_2MS_B                        FE8256       D      13       2   .text       
+     TASKS_LIST_1MS                          FE8248       9       9       2   .text       
+     TASKS_LIST_2MS_A                        FE8251       9       9       2   .text       
+     TASKS_LIST_2MS_B                        FE825A       9       9       2   .text       
      TASKS_LIST_10MS                         FE8263       9       9       2   .text       
      TASKS_LIST_50MS                         FE826C       5       5       2   .text       
      TASKS_LIST_100MS                        FE8271       5       5       2   .text       
-     main                                    FE8276      51      81       2   .text       
-     vfnBackgroundSubsystemTasks             FE82C7       1       1       2   .text       
-     vfnScheduler_GetTaskRunning             FE82C8       4       4       2   .text       
-     vfnScheduler_TaskStart                  FE82CC      1C      28      14   .text       
-     vfnScheduler_TaskActivate               FE82E8       F      15      12   .text       
-     vfnScheduler_TaskPreempt                FE82F7       8       8       2   .text       
-     vfnScheduler_TaskRestart                FE82FF      10      16       2   .text       
-     vfnScheduler_Init                       FE830F      89     137       2   .text       
-     vfnScheduler_Start                      FE8398       A      10       2   .text       
-     vfnSchedulepoint                        FE83A2      B5     181      12   .text       
-     vfnTask_Scheduler                       FE8457      A8     168       2   .text       
-     vfnScheduler_Callback                   FE84FF      6B     107       3   .text       
-     vfnMemAlloc_NearInit                    FE856A      76     118       2   .text       
-     MemAlloc_NearReserve                    FE85E0      5A      90      10   .text       
-     vfnMemAlloc_NearErase                   FE863A      11      17       2   .text       
-     vfnMemAlloc_Init                        FE864B      90     144       2   .text       
-     vfnMemAlloc_Erase                       FE86DB      17      23       2   .text       
-     vfnCAN_Init                             FE86F2     132     306       3   .text       
-     vfnCAN_BaudRateConfig                   FE8824      26      38       2   .text       
-     vfnCAN_AcceptanceFiltersInit            FE884A     187     391       7   .text       
-     u8CAN_enqueueFrameforTx                 FE89D1      B2     178       5   .text       
-     vfnCAN_Tx_handler                       FE8A83     128     296       2   .text       
-     u8CAN_RxFifoDepth                       FE8BAB      12      18       2   .text       
-     vfnCAN_Rx_handler                       FE8BBD     192     402       4   .text       
-     vfnCAN_GetRxMessages                    FE8D4F      5F      95       2   .text       
-     vfnCAN_Periodic_Tx_Queuing              FE8DAE      B5     181       2   .text       
-     vfnCAN_Periodic_Rx                      FE8E63      17      23       2   .text       
-     vfnADC_StartConversion                  FE8E7A       6       6       2   .text       
-     vfnStartAdcConversion                   FE8E80       5       5       2   .text       
+     main                                    FE8276      5A      90       2   .text       
+     vfnBackgroundSubsystemTasks             FE82D0       1       1       2   .text       
+     vfnScheduler_GetTaskRunning             FE82D1       4       4       2   .text       
+     vfnScheduler_TaskStart                  FE82D5      1C      28      14   .text       
+     vfnScheduler_TaskActivate               FE82F1       F      15      12   .text       
+     vfnScheduler_TaskPreempt                FE8300       8       8       2   .text       
+     vfnScheduler_TaskRestart                FE8308      10      16       2   .text       
+     vfnScheduler_Init                       FE8318      89     137       2   .text       
+     vfnScheduler_Start                      FE83A1       A      10       2   .text       
+     vfnSchedulepoint                        FE83AB      B5     181      12   .text       
+     vfnTask_Scheduler                       FE8460      A8     168       2   .text       
+     vfnScheduler_Callback                   FE8508      6B     107       3   .text       
+     vfnMemAlloc_NearInit                    FE8573      76     118       2   .text       
+     MemAlloc_NearReserve                    FE85E9      5A      90      10   .text       
+     vfnMemAlloc_NearErase                   FE8643      11      17       2   .text       
+     vfnMemAlloc_Init                        FE8654      90     144       2   .text       
+     vfnMemAlloc_Erase                       FE86E4      17      23       2   .text       
+     vfnCAN_Init                             FE86FB     139     313       3   .text       
+     vfnCAN_BaudRateConfig                   FE8834      26      38       2   .text       
+     vfnCAN_AcceptanceFiltersInit            FE885A     4C3    1219      12   .text       
+     u8CAN_enqueueFrameforTx                 FE8D1D      B2     178       9   .text       
+     vfnCAN_Tx_handler                       FE8DCF     128     296       2   .text       
+     u8CAN_RxFifoDepth                       FE8EF7      12      18       2   .text       
+     vfnCAN_Rx_handler                       FE8F09     192     402       4   .text       
+     vfnCAN_GetRxMessages                    FE909B      5F      95       6   .text       
+     vfnCAN_Periodic_Tx_Queuing              FE90FA      B5     181       2   .text       
+     vfnCAN_Periodic_Rx                      FE91AF      17      23       2   .text       
+     vfnADC_Init                             FE91C6      2F      47       2   .text       
+     vfnADC_StartConversion                  FE91F5       6       6       2   .text       
+     vfnCbMsgID_0x1abcdef7                   FE91FB      34      52       2   .text       
+     vfnCbMsgID_0x1abcdef8                   FE922F      34      52       2   .text       
+     vfnStoreAdcResult                       FE9263       F      15       3   .text       
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
@@ -4171,10 +4183,6 @@ mscan.c.o:
   u8CAN_TxQueueDepth vfnCAN_B_RxFrame_Isr vfnCAN_B_TxFrame_Isr 
   vfnCAN_C_RxFrame_Isr vfnCAN_C_TxFrame_Isr vfnCAN_D_RxFrame_Isr 
   vfnCAN_D_TxFrame_Isr 
-lib_adc.c.o:
-  vfnADC_Init 
-Diagnostic.c.o:
-  vfnWindowAlgorithm_Init WindowAlgorithm 
 NOT USED VARIABLES
 rtshc12.c.o (ansixb.lib):
   _PowOfTwo_8 _PowOfTwo_16 _PowOfTwo_32 errno 
@@ -4186,44 +4194,38 @@ memory_allocation.c.o:
   farStartAddress.3 farEndAddress.4 
 mscan.c.o:
   u8RxLength u32RxID 
-Diagnostic.c.o:
-  au8MsgResponse au32key mReceivedBytes sample_window_avg sample_window_avg2 
-  current_state mTransport_error Send_Message mReceiveBuffer 
-  mFlagMessageReceived mCounter5ms mCounterBytesSent1ms mCheckSum gPosResponse 
-  au8Encrypted au8seedSent u8dataToSend u8dataToSendSize u16adcdata_Channels 
-  ptr_u16_currentsampleCh0 ptr_u16_currentsampleCh1 sample_windowsize 
 
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
-------- ROM-ADDRESS: 0x42FD ---- SIZE       5 ---
+------- ROM-ADDRESS: 0x4310 ---- SIZE       5 ---
 Filling bytes inserted
  00380FE102
-------- ROM-ADDRESS: 0x4302 ---- RAM-ADDRESS: 0x2102 ---- SIZE      46 ---
+------- ROM-ADDRESS: 0x4315 ---- RAM-ADDRESS: 0x2102 ---- SIZE      46 ---
 Name of initialized Object : TimeTriggeredTasks:2
- 8248FE0000 050001824D FE00000400
- 028256FE00 0004000382 63FE000003
+ 8248FE0000 0500018251 FE00000400
+ 02825AFE00 0004000382 63FE000003
  0004826CFE 0000020005 8271FE0000
  01
-------- ROM-ADDRESS: 0x4330 ---- SIZE       1 ---
+------- ROM-ADDRESS: 0x4343 ---- SIZE       1 ---
 Filling bytes inserted
  00
-------- ROM-ADDRESS: 0x4331 ---- RAM-ADDRESS: 0x2131 ---- SIZE       1 ---
+------- ROM-ADDRESS: 0x4344 ---- RAM-ADDRESS: 0x2131 ---- SIZE       1 ---
 Name of initialized Object : NearRamPages_status:1
  10
-------- ROM-ADDRESS: 0x4332 ---- SIZE       7 ---
+------- ROM-ADDRESS: 0x4345 ---- SIZE       7 ---
 Filling bytes inserted
  0000000000 0000
-------- ROM-ADDRESS: 0x4339 ---- RAM-ADDRESS: 0x2139 ---- SIZE       1 ---
+------- ROM-ADDRESS: 0x434C ---- RAM-ADDRESS: 0x2139 ---- SIZE       1 ---
 Name of initialized Object : PagedRamPagesFar_status:1
  10
-------- ROM-ADDRESS: 0x433A ---- SIZE       5 ---
+------- ROM-ADDRESS: 0x434D ---- SIZE       5 ---
 Filling bytes inserted
  00010FE143
-------- ROM-ADDRESS: 0x433F ---- RAM-ADDRESS: 0x2143 ---- SIZE       1 ---
+------- ROM-ADDRESS: 0x4352 ---- RAM-ADDRESS: 0x2143 ---- SIZE       1 ---
 Name of initialized Object : PagedRamPagesFar_status:11
  10
-------- ROM-ADDRESS: 0x4340 ---- SIZE       2 ---
+------- ROM-ADDRESS: 0x4353 ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -4236,6 +4238,7 @@ TimeTriggeredTasks        USES TASKS_LIST_1MS TASKS_LIST_2MS_A
 _Startup                  USES __SEG_END_SSTACK Init main 
 NearMemAlloc_config       USES NearRamPages_config 
 DynamicMemAlloc_config    USES PagedRamPagesFar_config 
+MSCAN_A_rx_msg_cfg        USES vfnCbMsgID_0x1abcdef7 vfnCbMsgID_0x1abcdef8 
 CAN_device_cfg            USES MSCAN_A_rx_msg_cfg MSCAN_A_tx_msg_cfg 
 MSCAN_cfg                 USES CAN_device_cfg 
 _LDIVU                    USES _lDivMod 
@@ -4245,7 +4248,7 @@ vfnPll_Clock_Monitor_Isr  USES _CRGFLG u16PLL_Loss_of_Lock_Counter
 vfnSCI_Tx_Rx_Handler      USES _SCI0SR1 _SCI0DRL sci_ch_status _SCI0CR2 
 vfnSCI0_TxRx_Isr          USES vfnSCI_Tx_Rx_Handler 
 vfnSCI1_TxRx_Isr          USES vfnSCI_Tx_Rx_Handler 
-vfnCAN_A_RxFrame_Isr      USES vfnCAN_Rx_handler 
+vfnCAN_A_RxFrame_Isr      USES vfnCAN_Rx_handler mscan_cfg mscan 
 vfnCAN_A_TxFrame_Isr      USES vfnCAN_Tx_handler 
 vfnADC_Complete_Conversion_Isr USES _ATD0STAT0 _ATD0STAT2 _ATD0DR0 _ATD0DR1 
                                 pAdcCallback_conversion 
@@ -4273,19 +4276,18 @@ vfnCOPWatchdog_Init       USES _COPCTL gu8COPWatchdogStatus
 vfnCOPWatchdog_Reset      USES gu8COPWatchdogStatus _ARMCOP 
 vfn_XGATE_CPU_init        USES XGATE_VectorTable _XGISP31 _INT_CFADDR 
                                 _INT_CFDATA1 _XGMCTL 
-TASKS_LIST_1MS            USES vfnSchedulepoint 
+TASKS_LIST_1MS            USES vfnADC_StartConversion vfnSchedulepoint 
 TASKS_LIST_2MS_A          USES vfnCOPWatchdog_Reset vfnSchedulepoint 
 TASKS_LIST_2MS_B          USES vfnCAN_Periodic_Tx_Queuing vfnSchedulepoint 
-                                vfnStartAdcConversion 
 TASKS_LIST_10MS           USES vfnCAN_Periodic_Rx vfnSchedulepoint 
 TASKS_LIST_50MS           USES vfnSchedulepoint 
 TASKS_LIST_100MS          USES vfnSchedulepoint 
 main                      USES _XGMCTL vfn_XGATE_CPU_init vfnInterrupt_Init 
                                 vfnPLL_Init _PORTAB _DDRAB NearMemAlloc_config 
                                 vfnMemAlloc_NearInit DynamicMemAlloc_config vfnMemAlloc_Init 
-                                vfnInputs_Outputs_Init MSCAN_cfg vfnCAN_Init vfnScheduler_Init 
-                                vfnCOPWatchdog_Init vfnScheduler_Start vfnTask_Scheduler 
-                                vfnBackgroundSubsystemTasks 
+                                vfnInputs_Outputs_Init vfnStoreAdcResult vfnADC_Init MSCAN_cfg 
+                                vfnCAN_Init vfnScheduler_Init vfnCOPWatchdog_Init 
+                                vfnScheduler_Start vfnTask_Scheduler vfnBackgroundSubsystemTasks 
 vfnScheduler_GetTaskRunning USES ptrTaskScheduler_Task_Running 
 vfnScheduler_TaskStart    USES TaskScheduler_Task_ID_Running 
                                 ptrTaskScheduler_Task_Running 
@@ -4322,9 +4324,6 @@ vfnCAN_Init               USES mscan_cfg MemAlloc_NearReserve mscan
 vfnCAN_BaudRateConfig     USES _LCMP _CAN0BTR0 _CAN0BTR1 
 vfnCAN_AcceptanceFiltersInit USES _CASE_CHECKED vfnCAN_AcceptanceFiltersInit 
                                 _CAN0IDAC _CAN0IDAR0 _CAN0IDMR0 _CAN0IDAR4 _CAN0IDMR4 
-                                _CAN0IDAR1 _CAN0IDMR1 _CAN0IDAR2 _CAN0IDMR2 _CAN0IDAR3 
-                                _CAN0IDMR3 _CAN0IDAR5 _CAN0IDMR5 _CAN0IDAR6 _CAN0IDMR6 
-                                _CAN0IDAR7 _CAN0IDMR7 
 u8CAN_enqueueFrameforTx   USES mscan mscan_cfg u8CAN_enqueueFrameforTx 
                                 _CAN0TIER 
 vfnCAN_Tx_handler         USES mscan _CAN0TFLG _CAN0TBSEL _CAN0TXIDR0 
@@ -4338,8 +4337,14 @@ vfnCAN_Periodic_Tx_Queuing USES u16Tx_Loop_Counter.1 aMSCAN_Tx_Buffers.2
                                 u8CAN_enqueueFrameforTx u8ErrorFlag 
 vfnCAN_Periodic_Rx        USES u8CAN_RxFifoDepth aMSCAN_Rx_Buffers.3 
                                 vfnCAN_GetRxMessages 
+vfnADC_Init               USES _ATD0CTL01 _ATD0CTL23 _ATD0CTL45 _ATD0DIEN 
+                                pAdcCallback_conversion 
 vfnADC_StartConversion    USES _ATD0CTL45 
-vfnStartAdcConversion     USES vfnADC_StartConversion 
+vfnCbMsgID_0x1abcdef7     USES vfnCAN_GetRxMessages g16AdcResult_Ch0 
+                                u8CAN_enqueueFrameforTx 
+vfnCbMsgID_0x1abcdef8     USES vfnCAN_GetRxMessages g16AdcResult_Ch1 
+                                u8CAN_enqueueFrameforTx 
+vfnStoreAdcResult         USES g16AdcResult_Ch0 g16AdcResult_Ch1 
 
 *********************************************************************************************
 DEPENDENCY TREE
@@ -4382,6 +4387,30 @@ DEPENDENCY TREE
  |  |       
  |  +- vfnInputs_Outputs_Init
  |  |    
+ |  +- vfnStoreAdcResult   
+ |  |    
+ |  +- vfnADC_Init         
+ |  |    
+ |  +- MSCAN_cfg           
+ |  |  | 
+ |  |  +- CAN_device_cfg      
+ |  |     | 
+ |  |     +- MSCAN_A_rx_msg_cfg  
+ |  |        | 
+ |  |        +- vfnCbMsgID_0x1abcdef7
+ |  |        |  | 
+ |  |        |  +- vfnCAN_GetRxMessages
+ |  |        |  |  | 
+ |  |        |  |  +- _COPY               
+ |  |        |  |       
+ |  |        |  +- u8CAN_enqueueFrameforTx
+ |  |        |       
+ |  |        +- vfnCbMsgID_0x1abcdef8
+ |  |           | 
+ |  |           +- vfnCAN_GetRxMessages (see above)
+ |  |           |  
+ |  |           +- u8CAN_enqueueFrameforTx (see above)
+ |  |              
  |  +- vfnCAN_Init         
  |  |  | 
  |  |  +- MemAlloc_NearReserve
@@ -4402,6 +4431,8 @@ DEPENDENCY TREE
  |  |  |  |  | 
  |  |  |  |  +- TASKS_LIST_1MS      
  |  |  |  |  |  | 
+ |  |  |  |  |  +- vfnADC_StartConversion
+ |  |  |  |  |  |    
  |  |  |  |  |  +- vfnSchedulepoint    
  |  |  |  |  |     | 
  |  |  |  |  |     +- vfnScheduler_GetTaskRunning
@@ -4422,24 +4453,18 @@ DEPENDENCY TREE
  |  |  |  |  |  | 
  |  |  |  |  |  +- vfnCAN_Periodic_Tx_Queuing
  |  |  |  |  |  |  | 
- |  |  |  |  |  |  +- u8CAN_enqueueFrameforTx
- |  |  |  |  |  |       
+ |  |  |  |  |  |  +- u8CAN_enqueueFrameforTx (see above)
+ |  |  |  |  |  |     
  |  |  |  |  |  +- vfnSchedulepoint     (see above)
- |  |  |  |  |  |  
- |  |  |  |  |  +- vfnStartAdcConversion
- |  |  |  |  |     | 
- |  |  |  |  |     +- vfnADC_StartConversion
- |  |  |  |  |          
+ |  |  |  |  |     
  |  |  |  |  +- TASKS_LIST_10MS     
  |  |  |  |  |  | 
  |  |  |  |  |  +- vfnCAN_Periodic_Rx  
  |  |  |  |  |  |  | 
  |  |  |  |  |  |  +- u8CAN_RxFifoDepth   
  |  |  |  |  |  |  |    
- |  |  |  |  |  |  +- vfnCAN_GetRxMessages
- |  |  |  |  |  |     | 
- |  |  |  |  |  |     +- _COPY               
- |  |  |  |  |  |          
+ |  |  |  |  |  |  +- vfnCAN_GetRxMessages (see above)
+ |  |  |  |  |  |     
  |  |  |  |  |  +- vfnSchedulepoint     (see above)
  |  |  |  |  |     
  |  |  |  |  +- TASKS_LIST_50MS     
@@ -4513,5 +4538,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 8
-Total size of all blocks to be downloaded: 5247
+Total size of all blocks to be downloaded: 6271
 

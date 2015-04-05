@@ -21,7 +21,8 @@
 /** S12X derivative information */
 #include    __MCU_DERIVATIVE
 /** Variable types and common definitions */
-#include    "typedefs.h"
+#include   "typedefs.h"
+#include   "Diagnostic.h"
 
 /*****************************************************************************************************
 * Declaration of module wide TYPES

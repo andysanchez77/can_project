@@ -28,7 +28,8 @@
 /* In case MSCAN_ACC_FILTERS_8_BIT_MODE ->  8 exact reception objects (acceptance filters) shall be configured */
 /* In case MSCAN_ACC_FILTERS_16_BIT_MODE -> 4 exact reception objects (acceptance filters) shall be configured */
 /* In case MSCAN_ACC_FILTERS_32_BIT_MODE -> 2 exact reception objects (acceptance filters) shall be configured */
-const tMSCAN_RxHWObjectConfig MSCAN_A_rx_msg_cfg[] =
+
+/*const tMSCAN_RxHWObjectConfig MSCAN_A_rx_msg_cfg[] =
 {
     {
         (UINT32)CAN_STD_ID_0x00a5,
@@ -78,8 +79,28 @@ const tMSCAN_RxHWObjectConfig MSCAN_A_rx_msg_cfg[] =
 	    EXTENDED_ID,
 	    MSCAN_ACC_FILTER_7,
     },
+};*/
+const tMSCAN_RxHWObjectConfig MSCAN_A_rx_msg_cfg[] =
+{
+    {
+        (UINT32)CAN_EXT_ID_0x1abcdef7,
+	    (tCallbackFunction)vfnCbMsgID_0x1abcdef7,
+	    EXTENDED_ID,
+	    MSCAN_ACC_FILTER_0,
+    },
+    {
+        (UINT32)CAN_EXT_ID_0x1abcdef8,
+	    (tCallbackFunction)vfnCbMsgID_0x1abcdef8,
+	    EXTENDED_ID,
+	    MSCAN_ACC_FILTER_2,
+    },
+    {
+      (UINT32)CAN_STD_ID_0x0244,
+	    (tCallbackFunction)NULL,
+	    STANDARD_ID,
+	    MSCAN_ACC_FILTER_2,
+    },
 };
-
 /**< Configuration of MSCAN A TX fifo */
 const tMSCAN_TxHwFifoConfig MSCAN_A_tx_msg_cfg =
 {

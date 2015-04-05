@@ -89,7 +89,7 @@ void vfnCAN_Init(const tMSCAN_config * MSCAN_config)
         vfnCAN_BaudRateConfig(device, baudrate);
         
         /* Configure acceptance filters */
-        vfnCAN_AcceptanceFiltersInit(&mscan_cfg->mscan_device_cfg[device]);
+        vfnCAN_AcceptanceFiltersInit(&mscan_cfg->mscan_device_cfg[device], mscan_cfg->mscan_device_cfg[MSCAN_A].nr_of_rx_hwOb);
             
         /* Exit initialization mode request */
         MSCAN_WRITE_CTL0(device, 0x00);
@@ -156,7 +156,7 @@ void vfnCAN_BaudRateConfig(enum tMSCAN_Device device, UINT32 u32Baudrate)
 * \param    const tMSCAN_DeviceConfig * controller_cfg
 * \return   void
 */
-void vfnCAN_AcceptanceFiltersInit(const tMSCAN_DeviceConfig * controller_cfg) 
+void vfnCAN_AcceptanceFiltersInit(const tMSCAN_DeviceConfig * controller_cfg, UINT8 filters_to_config) 
 {
     const tMSCAN_RxHWObjectConfig * rx_hwObj_cfg;
     UINT8 *acc_reg;
@@ -185,7 +185,7 @@ void vfnCAN_AcceptanceFiltersInit(const tMSCAN_DeviceConfig * controller_cfg)
             /* Get address of first mask register */
             mask_reg = MSCAN_REG_IDMR0(device);
             /* sweep through the first 4 filters */  
-            for (index = 0; index < 4; index++)
+            for (index = 0; ((index < 4) && (index<filters_to_config)); index++)
             {
                 id_type = rx_hwObj_cfg->id_type;
                 if (id_type == STANDARD_ID)
@@ -209,7 +209,7 @@ void vfnCAN_AcceptanceFiltersInit(const tMSCAN_DeviceConfig * controller_cfg)
             /* Get address of fourth mask register */
             mask_reg = MSCAN_REG_IDMR4(device);
             /* sweep through the last 4 filters */ 
-            for (index = 0; index < 4; index++)
+            for (index = 0; (index < 4) && ((index+4 < filters_to_config)); index++)
             {
                 id_type = rx_hwObj_cfg->id_type;
                 if (id_type == STANDARD_ID)
@@ -233,59 +233,217 @@ void vfnCAN_AcceptanceFiltersInit(const tMSCAN_DeviceConfig * controller_cfg)
         case (MSCAN_ACC_FILTERS_16_BIT_MODE):
             /* Four 16-bit acceptance filters */
             idam = 0x01 << 4;
-            MSCAN_WRITE_IDAC(device, idam );                  
-    
-            /* 16 bit Filter 0 */
-            CAN0IDAR0 = STD_ID_ACC_CODE_HIGH(RX_16_BIT_CANID_0);   
-            CAN0IDMR0 = MASK_CODE_ST_ID_HIGH;
-            CAN0IDAR1 = STD_ID_ACC_CODE_LOW(RX_16_BIT_CANID_0);
-            CAN0IDMR1 = MASK_CODE_ST_ID_LOW;
+            MSCAN_WRITE_IDAC(device, idam );
+            /* Get address of first acceptance register */
+            acc_reg = MSCAN_REG_IDAR0 (device);
+            /* Get address of first mask register */
+            mask_reg = MSCAN_REG_IDMR0(device);
             
-            /* 16 bit Filter 1 */
-            CAN0IDAR2 = STD_ID_ACC_CODE_HIGH(RX_16_BIT_CANID_1);   
-            CAN0IDMR2 = MASK_CODE_ST_ID_HIGH;
-            CAN0IDAR3 = STD_ID_ACC_CODE_LOW(RX_16_BIT_CANID_1);
-            CAN0IDMR3 = MASK_CODE_ST_ID_LOW;
+            /* sweep through the first 4 filters */  
+            for (index = 0; ( index < 2) && (index < filters_to_config); index++)
+            {
+                id_type = rx_hwObj_cfg->id_type;
+                if (id_type == STANDARD_ID)
+                {
+                  *acc_reg  =  STD_ID_ACC_CODE_HIGH (rx_hwObj_cfg->mssg_id);  
+                  *mask_reg =  MASK_CODE_ST_ID_HIGH;
+                } 
+                else
+                 {
+                  *acc_reg  =  EXT_ID_ACC_CODE_IR0 (rx_hwObj_cfg->mssg_id);  
+                  *mask_reg =  MASK_CODE_EXT_ID_IR0;
+                 }
+                 acc_reg++;
+                 mask_reg++;
+                    
+                if (id_type == STANDARD_ID)
+                {   
+                 *acc_reg  =  STD_ID_ACC_CODE_LOW(rx_hwObj_cfg->mssg_id);  
+                 *mask_reg =  MASK_CODE_ST_ID_LOW;
+                 } 
+                 else
+                 {
+                    *acc_reg  =  EXT_ID_ACC_CODE_IR1(rx_hwObj_cfg->mssg_id);  
+                    *mask_reg =  MASK_CODE_EXT_ID_IR1;
+                 
+                 }    
+                /* Point to next acceptance and mask registers */
+                acc_reg++;
+                mask_reg++;
+                /* Similarly, point to next Rx object (acceptance filter) */
+                rx_hwObj_cfg++;
+            }
+            /* Get address of fourth acceptance register */
+            acc_reg = MSCAN_REG_IDAR4 (device);
+            /* Get address of fourth mask register */
+            mask_reg = MSCAN_REG_IDMR4(device);
             
-            /* 16 bit Filter 2 */
-            CAN0IDAR4 = STD_ID_ACC_CODE_HIGH(RX_16_BIT_CANID_2);   
-            CAN0IDMR4 = MASK_CODE_ST_ID_HIGH;
-            CAN0IDAR5 = STD_ID_ACC_CODE_LOW(RX_16_BIT_CANID_2);
-            CAN0IDMR5 = MASK_CODE_ST_ID_LOW;
-
-            /* 16 bit Filter 3 */    
-            CAN0IDAR6 = STD_ID_ACC_CODE_HIGH(RX_16_BIT_CANID_3);   
-            CAN0IDMR6 = MASK_CODE_ST_ID_HIGH;
-            CAN0IDAR7 = STD_ID_ACC_CODE_LOW(RX_16_BIT_CANID_3);
-            CAN0IDMR7 = MASK_CODE_ST_ID_LOW;
+            /* sweep through the last 4 filters */ 
+            for (index = 0; (index < 2) && ((index+2) < filters_to_config); index++)
+            {
+              id_type = rx_hwObj_cfg->id_type;
+              if (id_type == STANDARD_ID)
+              {
+                *acc_reg  =  STD_ID_ACC_CODE_HIGH (rx_hwObj_cfg->mssg_id);  
+                *mask_reg =  MASK_CODE_ST_ID_HIGH;
+              } 
+              else
+              {
+                *acc_reg  =  EXT_ID_ACC_CODE_IR0 (rx_hwObj_cfg->mssg_id);  
+                *mask_reg =  MASK_CODE_EXT_ID_IR0;
+              }
+               acc_reg++;
+               mask_reg++;
+                  
+              if (id_type == STANDARD_ID)
+              {   
+               *acc_reg  =  STD_ID_ACC_CODE_LOW(rx_hwObj_cfg->mssg_id);  
+               *mask_reg =  MASK_CODE_ST_ID_LOW;
+              } 
+              else
+              {
+               *acc_reg  =  EXT_ID_ACC_CODE_IR1(rx_hwObj_cfg->mssg_id);  
+               *mask_reg =  MASK_CODE_EXT_ID_IR1; 
+              }    
+              /* Point to next acceptance and mask registers */
+              acc_reg++;
+              mask_reg++;
+              /* Similarly, point to next Rx object (acceptance filter) */
+              rx_hwObj_cfg++;
+            }                  
             
             break;
             
         case (MSCAN_ACC_FILTERS_32_BIT_MODE):   
             /* Two 32-bit acceptance filters */
             idam = 0x00 << 4;
-            MSCAN_WRITE_IDAC(device, idam );              
-            
-            /* 32 bit Filter 0 */
-            CAN0IDAR0 = EXT_ID_ACC_CODE_IR0(RX_32_BIT_CANID_0);   
-            CAN0IDMR0 = MASK_CODE_EXT_ID_IR0;
-            CAN0IDAR1 = EXT_ID_ACC_CODE_IR1(RX_32_BIT_CANID_0);
-            CAN0IDMR1 = MASK_CODE_EXT_ID_IR1;
-            CAN0IDAR2 = EXT_ID_ACC_CODE_IR2(RX_32_BIT_CANID_0);   
-            CAN0IDMR2 = MASK_CODE_EXT_ID_IR2;
-            CAN0IDAR3 = EXT_ID_ACC_CODE_IR3(RX_32_BIT_CANID_0);
-            CAN0IDMR3 = MASK_CODE_EXT_ID_IR3;
-            
-            /* 32 bit Filter 1 */
-            CAN0IDAR4 = STD_ID_ACC_CODE_HIGH(CAN_STD_ID_0x0644);   
-            CAN0IDMR4 = MASK_CODE_ST_ID_HIGH;
-            CAN0IDAR5 = STD_ID_ACC_CODE_LOW(CAN_STD_ID_0x0644);
-            CAN0IDMR5 = MASK_CODE_ST_ID_LOW;
-            CAN0IDAR6 = STD_ID_ACC_CODE_HIGH(0x0000);   
-            CAN0IDMR6 = MASK_CODE_ST_ID_HIGH;
-            CAN0IDAR7 = STD_ID_ACC_CODE_HIGH(0x0000);
-            CAN0IDMR7 = MASK_CODE_ST_ID_LOW; 
-        
+            MSCAN_WRITE_IDAC(device, idam );                
+
+             /* Get address of first acceptance register */
+            acc_reg = MSCAN_REG_IDAR0(device);
+            /* Get address of first mask register */
+            mask_reg = MSCAN_REG_IDMR0(device);
+            /* sweep through the first 4 filters */  
+            for (index = 0; ( index < 1) && (index < filters_to_config); index++)
+            {
+                id_type = rx_hwObj_cfg->id_type;
+                if (id_type == STANDARD_ID)
+                { 
+                        *acc_reg  =STD_ID_ACC_CODE_HIGH(rx_hwObj_cfg->mssg_id);
+                        *mask_reg =MASK_CODE_ST_ID_HIGH;
+                } 
+                else
+                {
+                      *acc_reg  =  EXT_ID_ACC_CODE_IR0 (rx_hwObj_cfg->mssg_id);  
+                      *mask_reg =  MASK_CODE_EXT_ID_IR0;
+                }   
+                 acc_reg++;
+                 mask_reg++;
+                if (id_type == STANDARD_ID)
+                { 
+                        *acc_reg  =STD_ID_ACC_CODE_LOW(rx_hwObj_cfg->mssg_id);
+                        *mask_reg =MASK_CODE_ST_ID_LOW;
+                } 
+                else
+                {
+                      *acc_reg  =  EXT_ID_ACC_CODE_IR1 (rx_hwObj_cfg->mssg_id);  
+                      *mask_reg =  MASK_CODE_EXT_ID_IR1;
+                }  
+                 acc_reg++;
+                 mask_reg++;
+                 
+                if (id_type == STANDARD_ID)
+                { 
+                        *acc_reg  =STD_ID_ACC_CODE_LOW(0x0);
+                        *mask_reg =MASK_CODE_ST_ID_LOW;
+                } 
+                else
+                {
+                      *acc_reg  =  EXT_ID_ACC_CODE_IR2(rx_hwObj_cfg->mssg_id);  
+                      *mask_reg =  MASK_CODE_EXT_ID_IR2;
+                }
+                 acc_reg++;
+                 mask_reg++;
+                                 if (id_type == STANDARD_ID)
+                { 
+                        *acc_reg  =STD_ID_ACC_CODE_LOW(0x0);
+                        *mask_reg =MASK_CODE_ST_ID_LOW;
+                } 
+                else
+                {
+                      *acc_reg  =  EXT_ID_ACC_CODE_IR3(rx_hwObj_cfg->mssg_id);  
+                      *mask_reg =  MASK_CODE_EXT_ID_IR3;
+                } 
+                /* Point to next acceptance and mask registers */
+                acc_reg++;
+                mask_reg++;
+                /* Similarly, point to next Rx object (acceptance filter) */
+                rx_hwObj_cfg++;
+            }
+            /* Get address of fourth acceptance register */
+            acc_reg = MSCAN_REG_IDAR4 (device);
+            /* Get address of fourth mask register */
+            mask_reg = MSCAN_REG_IDMR4(device);
+            /* sweep through the last 4 filters */ 
+            for (index = 0; ( index < 1) && ((index+1) < filters_to_config); index++)
+            {
+                id_type = rx_hwObj_cfg->id_type;
+                if (id_type == STANDARD_ID)
+                { 
+                  *acc_reg  =STD_ID_ACC_CODE_HIGH(rx_hwObj_cfg->mssg_id);
+                  *mask_reg =MASK_CODE_ST_ID_HIGH;
+                } 
+                else
+                {
+                  *acc_reg  =  EXT_ID_ACC_CODE_IR0 (rx_hwObj_cfg->mssg_id);  
+                  *mask_reg =  MASK_CODE_EXT_ID_IR0;
+                }   
+                 acc_reg++;
+                 mask_reg++;
+                if (id_type == STANDARD_ID)
+                { 
+                  *acc_reg  =STD_ID_ACC_CODE_LOW(rx_hwObj_cfg->mssg_id);
+                  *mask_reg =MASK_CODE_ST_ID_LOW;
+                } 
+                else
+                {
+                  *acc_reg  =  EXT_ID_ACC_CODE_IR1 (rx_hwObj_cfg->mssg_id);  
+                  *mask_reg =  MASK_CODE_EXT_ID_IR1;
+                }  
+                 acc_reg++;
+                 mask_reg++;
+                 
+                if (id_type == STANDARD_ID)
+                { 
+                  *acc_reg  =STD_ID_ACC_CODE_LOW(0x0);
+                  *mask_reg =MASK_CODE_ST_ID_LOW;
+                } 
+                else
+                {
+                  *acc_reg  =  EXT_ID_ACC_CODE_IR2(rx_hwObj_cfg->mssg_id);  
+                  *mask_reg =  MASK_CODE_EXT_ID_IR2;
+                } 
+
+                 acc_reg++;
+                 mask_reg++;
+                 
+                if (id_type == STANDARD_ID)
+                { 
+                  *acc_reg  =STD_ID_ACC_CODE_LOW(0x0);
+                  *mask_reg =MASK_CODE_ST_ID_LOW;
+                } 
+                else
+                {
+                  *acc_reg  =  EXT_ID_ACC_CODE_IR3(rx_hwObj_cfg->mssg_id);  
+                  *mask_reg =  MASK_CODE_EXT_ID_IR3;
+                } 
+                    
+                /* Point to next acceptance and mask registers */
+                acc_reg++;
+                mask_reg++;
+                /* Similarly, point to next Rx object (acceptance filter) */
+                rx_hwObj_cfg++;
+            }     
             break;
         
         case (MSCAN_ACC_FILTERS_INVALID_MODE):   
@@ -546,8 +704,30 @@ void vfnCAN_GetRxMessages(enum tMSCAN_Device device, tMSCAN_Message *can_buffer,
 #pragma CODE_SEG __NEAR_SEG NON_BANKED
 
 void interrupt vfnCAN_A_RxFrame_Isr(void)
-{          
-    vfnCAN_Rx_handler(MSCAN_A);
+{
+  UINT8 i;
+  UINT8 u8Filters_Configured;   
+  tMSCAN_RxHWObjectConfig * temp_RxHw_Object;   
+
+
+  vfnCAN_Rx_handler(MSCAN_A); 
+  /*To determine what filter generated the interrupt*/
+  u8Filters_Configured=mscan_cfg->mscan_device_cfg[MSCAN_A].nr_of_rx_hwOb;
+    
+    for (i = 0; i < u8Filters_Configured; i++)
+    {
+      temp_RxHw_Object = mscan_cfg->mscan_device_cfg[MSCAN_A].rx_hwObj_cfg+i;
+
+      /*Validate if the ID is the expected one*/
+      if(mscan[MSCAN_A].rx_read->ID == temp_RxHw_Object->mssg_id) 
+      {  
+        if(NULL != temp_RxHw_Object->callback) 
+        { 
+          /*Call the callback function*/
+          temp_RxHw_Object->callback();
+        }
+      }
+    }          
 }
 
 void interrupt vfnCAN_A_TxFrame_Isr(void)

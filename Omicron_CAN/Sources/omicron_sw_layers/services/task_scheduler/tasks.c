@@ -14,6 +14,7 @@
 
 /** Scheduler function prototypes definitions */
 #include    "tasks.h"
+#include    "lib_adc.h"
 
 /*****************************************************************************************************
 * Definition of  VARIABLEs - 
@@ -31,6 +32,7 @@
 /* List of tasks to be executed @ 1ms */
 void TASKS_LIST_1MS( void )
 {
+    vfnADC_StartConversion();
     vfnSchedulepoint();
 }
 
@@ -44,8 +46,7 @@ void TASKS_LIST_2MS_A(void)
 void TASKS_LIST_2MS_B( void )
 {   
     vfnCAN_Periodic_Tx_Queuing();
-    vfnSchedulepoint();
-    vfnStartAdcConversion(); 
+    vfnSchedulepoint(); 
 }
     
 /* List of tasks to be executed @ 10ms */
