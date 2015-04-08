@@ -27,6 +27,16 @@
 /** PLL prototypes and definitions */
 #include "pll.h"
 
+
+
+#define HAL_ADC_NUMBER_OF_CHANNELS 2u   /* This definition must be between 1-16    */
+#define HAL_ADC_CHANNEL_0          (0)
+#define HAL_ADC_CHANNEL_1          (1)
+
+
+UINT16 ADC_SAMPLES_AVG[HAL_ADC_NUMBER_OF_CHANNELS];
+
+
 /*******************************************************************************/
 
 /*Callback called when ADC conversions are done*/
@@ -75,7 +85,7 @@ void vfnADC_StartConversion(void){
 * \param    void
 * \return   void
 */
-
+ /*
 UINT16 u16_ADC_Handler_GetResult(UINT8 adc_channel){
   UINT16 return_val;  
   if (HAL_ADC_NUMBER_OF_CHANNELS <   adc_channel ) 
@@ -87,7 +97,7 @@ UINT16 u16_ADC_Handler_GetResult(UINT8 adc_channel){
     return_val =  ADC_SAMPLES_AVG[adc_channel];
   }
   return (return_val);
-}
+}  */
 
 /*******************************************************************************/
 /**

@@ -19,6 +19,7 @@
 /** PLL prototypes and definitions */
 #include "pll.h"
 
+
 /*-- Types Definitions -------------------------------------------------------*/
 //MRBC typedef to control the Tx Flow 
 typedef struct AdcDataChannels_tag{
@@ -26,14 +27,9 @@ UINT16 Channel0;
 UINT16 Channel1;
 }AdcDataChannels_t; 
 
-#define HAL_ADC_NUMBER_OF_CHANNELS 2u   /* This definition must be between 1-16    */
-
-#define HAL_ADC_CHANNEL_0          (0)
-#define HAL_ADC_CHANNEL_1          (1)
-
 /*-- Data Decalration----------------------------------------------------------*/
 
-UINT16 ADC_SAMPLES_AVG[HAL_ADC_NUMBER_OF_CHANNELS];
+
 
 /* MRBC typedef of Tx Callback */
 typedef void (* ADC_Conv_Callback_t) (AdcDataChannels_t);
@@ -46,7 +42,7 @@ void vfnADC_Init(ADC_Conv_Callback_t AdcCallback);
 /** ADC Start conversion */
 void vfnADC_StartConversion(void);
 
-UINT16 u16_ADC_Handler_GetResult(UINT8 adc_channel);
+//UINT16 u16_ADC_Handler_GetResult(UINT8 adc_channel);
 
 #pragma CODE_SEG __NEAR_SEG NON_BANKED
 /** ADC(atd0) conversion complete interrupt function **/
