@@ -89,7 +89,7 @@ void vfnCAN_Init(const tMSCAN_config * MSCAN_config)
         vfnCAN_BaudRateConfig(device, baudrate);
         
         /* Configure acceptance filters */
-        vfnCAN_AcceptanceFiltersInit(&mscan_cfg->mscan_device_cfg[device], mscan_cfg->mscan_device_cfg[MSCAN_A].nr_of_rx_hwOb);
+        vfnCAN_AcceptanceFiltersInit(&mscan_cfg->mscan_device_cfg[device]);
             
         /* Exit initialization mode request */
         MSCAN_WRITE_CTL0(device, 0x00);
@@ -156,7 +156,7 @@ void vfnCAN_BaudRateConfig(enum tMSCAN_Device device, UINT32 u32Baudrate)
 * \param    const tMSCAN_DeviceConfig * controller_cfg
 * \return   void
 */
-void vfnCAN_AcceptanceFiltersInit(const tMSCAN_DeviceConfig * controller_cfg, UINT8 filters_to_config) 
+void vfnCAN_AcceptanceFiltersInit(const tMSCAN_DeviceConfig * controller_cfg) 
 {
     const tMSCAN_RxHWObjectConfig * rx_hwObj_cfg;
     UINT8 *acc_reg;
@@ -166,7 +166,9 @@ void vfnCAN_AcceptanceFiltersInit(const tMSCAN_DeviceConfig * controller_cfg, UI
     tMSCAN_IdType id_type;
     UINT8 idam;
     UINT8 index;
+    UINT8 filters_to_config;
     
+    filters_to_config = mscan_cfg->mscan_device_cfg[MSCAN_A].nr_of_rx_hwOb;
     
     filter_cfg = controller_cfg->filter_cfg;
     device = controller_cfg->device;

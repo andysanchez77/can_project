@@ -152,7 +152,7 @@ void vfnCAN_Init(const tMSCAN_config * MSCAN_config);
 void vfnCAN_BaudRateConfig(enum tMSCAN_Device device, UINT32 u32Baudrate); 
 
 /* MSCAN acceptance filter configuration */
-void vfnCAN_AcceptanceFiltersInit(const tMSCAN_DeviceConfig * controller_cfg, UINT8 filters_to_config);
+void vfnCAN_AcceptanceFiltersInit(const tMSCAN_DeviceConfig * controller_cfg);
 
 /* CAN frame transmission */
 UINT8 u8CAN_enqueueFrameforTx(enum tMSCAN_Device device, UINT32 u32ID, UINT8 u8Length, UINT8 *u8TxData, tMSCAN_IdType id_type);
