@@ -1,0 +1,4 @@
+L1818: Symbol 15 - ADC_SAMPLES_AVG duplicated in lib_adc.c.o and int_vectors.c.o
+L1301: Cannot open file C:\Users\ANDSANCH\Documents\GitHub\can_project\Omicron_CAN\Omicron_ASW_Data\SofTec_HCS12\ObjectCode\lib_adc.c.o
+L1818: Symbol 17 - ADC_SAMPLES_AVG duplicated in Diagnostic.c.o and int_vectors.c.o
+L1301: Cannot open file C:\Users\ANDSANCH\Documents\GitHub\can_project\Omicron_CAN\Omicron_ASW_Data\SofTec_HCS12\ObjectCode\Diagnostic.c.o

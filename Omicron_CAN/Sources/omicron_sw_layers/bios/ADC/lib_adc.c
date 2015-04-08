@@ -68,6 +68,26 @@ void vfnADC_StartConversion(void){
 
 }
 
+/*******************************************************************************/
+/**
+* \brief    Get ADC Results function.
+* \author   Miguel Reyes @MR
+* \param    void
+* \return   void
+*/
+
+UINT16 u16_ADC_Handler_GetResult(UINT8 adc_channel){
+  UINT16 return_val;  
+  if (HAL_ADC_NUMBER_OF_CHANNELS <   adc_channel ) 
+  {
+    return_val = 0;
+  } 
+  else
+  {
+    return_val =  ADC_SAMPLES_AVG[adc_channel];
+  }
+  return (return_val);
+}
 
 /*******************************************************************************/
 /**
