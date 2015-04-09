@@ -96,7 +96,7 @@ const tMSCAN_RxHWObjectConfig MSCAN_A_rx_msg_cfg[] =
     },
     {
       (UINT32)CAN_STD_ID_0x0244,
-	    (tCallbackFunction)NULL,
+	    (tCallbackFunction)vfnCbMsgID_0x0244,
 	    STANDARD_ID,
 	    MSCAN_ACC_FILTER_2,
     },
